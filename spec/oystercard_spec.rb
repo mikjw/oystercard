@@ -14,5 +14,10 @@ describe Oystercard do
     max_bal = Oystercard::MAXIMUM_BALANCE
     message = "Top-up failed - maximum balance of #{max_bal} exceeded"
     expect { subject.top_up(max_bal + 1) }.to raise_error(message)
-  end 
+  end
+
+  it 'deducts from balance' do
+    expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
+  end
+
 end
