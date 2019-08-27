@@ -16,10 +16,6 @@ describe Oystercard do
     expect { subject.top_up(max_bal + 1) }.to raise_error(message)
   end
 
-  it 'deducts from balance' do
-    expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
-  end
-
   it 'touches in' do
     subject.top_up(5)
     subject.touch_in
@@ -34,4 +30,12 @@ describe Oystercard do
     subject.touch_out
     expect(subject.in_use).to be(false)
   end
+
+  it 'deducts fare on touch out' do
+    min_fare = Oystercard::MIN_BALANCE
+    expect { subject.touch_out }.to change { subject.balance }.by(-min_fare)
+  end
+
 end
+
+

@@ -28,6 +28,13 @@ class Oystercard
   end
 
   def touch_out
+    deduct(MIN_BALANCE)
     @in_use = false
+  end
+
+  private 
+
+  def deduct(amount)
+    @balance -= amount
   end
 end
