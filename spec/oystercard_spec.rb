@@ -20,4 +20,13 @@ describe Oystercard do
     expect { subject.deduct(10) }.to change { subject.balance }.by(-10)
   end
 
+  it 'touches in' do
+    subject.touch_in
+    expect(subject.in_use).to be(true)
+  end
+
+  it 'touches out' do
+    subject.touch_out
+    expect(subject.in_use).to be(false)
+  end
 end
